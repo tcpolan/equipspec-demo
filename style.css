@@ -61,6 +61,9 @@ header .container {
   outline: none;
   background: #fff;
   transition: border-color 0.2s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .search-btn {
@@ -73,6 +76,9 @@ header .container {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .search-btn:active {
