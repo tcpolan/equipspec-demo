@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EquipSpec - Commercial Kitchen Equipment Specs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">Equip<span>Spec</span></a>
+      <a href="#" class="nav-link">Browse</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Every spec. Every model. Instantly.</h1>
+      <p>The fastest way to look up commercial kitchen equipment specifications.</p>
+      <input type="text" class="search-box" placeholder="Search by model number or manufacturer..." id="searchBox">
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">4,200+</div>
+        <div class="stat-label">Models</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">85+</div>
+        <div class="stat-label">Manufacturers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Years of Coverage</div>
+      </div>
+    </div>
+
+    <div class="browse-section">
+      <h2>Browse by Category</h2>
+      <div class="browse-grid">
+        <a href="#" class="browse-link">Ice Machines <span class="count">(620)</span></a>
+        <a href="#" class="browse-link">Refrigeration <span class="count">(840)</span></a>
+        <a href="#" class="browse-link">Ovens &amp; Ranges <span class="count">(720)</span></a>
+        <a href="#" class="browse-link">Steamers <span class="count">(380)</span></a>
+        <a href="#" class="browse-link">Fryers <span class="count">(410)</span></a>
+        <a href="#" class="browse-link">Dishwashers <span class="count">(340)</span></a>
+        <a href="#" class="browse-link">Griddles &amp; Broilers <span class="count">(290)</span></a>
+        <a href="#" class="browse-link">Holding &amp; Warming <span class="count">(260)</span></a>
+      </div>
+    </div>
+
+    <div class="browse-section">
+      <h2>Browse by Manufacturer</h2>
+      <div class="browse-grid">
+        <a href="#" class="browse-link">Hoshizaki <span class="count">(247)</span></a>
+        <a href="equipment/true-t-49-hc.html" class="browse-link">True <span class="count">(312)</span></a>
+        <a href="equipment/vulcan-sg4d.html" class="browse-link">Vulcan <span class="count">(198)</span></a>
+        <a href="equipment/cleveland-21cet8.html" class="browse-link">Cleveland <span class="count">(156)</span></a>
+        <a href="#" class="browse-link">Traulsen <span class="count">(184)</span></a>
+        <a href="#" class="browse-link">Manitowoc <span class="count">(210)</span></a>
+        <a href="#" class="browse-link">Alto-Shaam <span class="count">(142)</span></a>
+        <a href="#" class="browse-link">Rational <span class="count">(68)</span></a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      EquipSpec — Instant specs for commercial kitchen equipment
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('searchBox').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const q = this.value.trim().toLowerCase();
+        if (q.includes('km-1340') || q.includes('1340maj')) {
+          window.location.href = 'equipment/hoshizaki-km-1340maj.html';
+        } else if (q.includes('t-49') || q.includes('t49')) {
+          window.location.href = 'equipment/true-t-49-hc.html';
+        } else if (q.includes('sg4d') || q.includes('sg4')) {
+          window.location.href = 'equipment/vulcan-sg4d.html';
+        } else if (q.includes('21cet8') || q.includes('cet8')) {
+          window.location.href = 'equipment/cleveland-21cet8.html';
+        } else {
+          alert('Model not found — we\'ve been notified and will add it shortly.');
+        }
+      }
+    });
+  </script>
+</body>
+</html>
