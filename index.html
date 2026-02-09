@@ -18,7 +18,10 @@
     <div class="hero">
       <h1>Every spec. Every model. Instantly.</h1>
       <p>The fastest way to look up commercial kitchen equipment specifications.</p>
-      <input type="text" class="search-box" placeholder="Search by model number or manufacturer..." id="searchBox">
+      <div class="search-wrap">
+        <input type="search" class="search-box" placeholder="Search by model number..." id="searchBox" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+        <button class="search-btn" id="searchBtn">Search</button>
+      </div>
     </div>
 
     <div class="stats">
@@ -72,22 +75,25 @@
   </footer>
 
   <script>
-    document.getElementById('searchBox').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const q = this.value.trim().toLowerCase();
-        if (q.includes('km-1340') || q.includes('1340maj')) {
-          window.location.href = 'equipment/hoshizaki-km-1340maj.html';
-        } else if (q.includes('t-49') || q.includes('t49')) {
-          window.location.href = 'equipment/true-t-49-hc.html';
-        } else if (q.includes('sg4d') || q.includes('sg4')) {
-          window.location.href = 'equipment/vulcan-sg4d.html';
-        } else if (q.includes('21cet8') || q.includes('cet8')) {
-          window.location.href = 'equipment/cleveland-21cet8.html';
-        } else {
-          alert('Model not found — we\'ve been notified and will add it shortly.');
-        }
+    function doSearch() {
+      var q = document.getElementById('searchBox').value.trim().toLowerCase();
+      if (!q) return;
+      if (q.includes('km-1340') || q.includes('1340maj')) {
+        window.location.href = 'equipment/hoshizaki-km-1340maj.html';
+      } else if (q.includes('t-49') || q.includes('t49')) {
+        window.location.href = 'equipment/true-t-49-hc.html';
+      } else if (q.includes('sg4d') || q.includes('sg4')) {
+        window.location.href = 'equipment/vulcan-sg4d.html';
+      } else if (q.includes('21cet8') || q.includes('cet8')) {
+        window.location.href = 'equipment/cleveland-21cet8.html';
+      } else {
+        alert('Model not found — we\'ve been notified and will add it shortly.');
       }
+    }
+    document.getElementById('searchBox').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
     });
+    document.getElementById('searchBtn').addEventListener('click', doSearch);
   </script>
 </body>
 </html>
