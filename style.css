@@ -415,9 +415,108 @@ footer {
   letter-spacing: 0.5px;
 }
 
+/* Replacement Finder */
+.match-rank {
+  display: inline-block;
+  background: #4a9eff;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  margin-right: 8px;
+  vertical-align: middle;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.match-exact {
+  color: #1a7a1a;
+}
+
+.match-close {
+  color: #8a6d00;
+}
+
+.match-better {
+  color: #1a5cb0;
+}
+
+.replace-verdict {
+  padding: 12px 16px;
+  border-top: 1px solid #f0f0f0;
+  background: #f8f9fa;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.replace-btn {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  background: #4a9eff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Comparison Table */
+.compare-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.compare-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 8px 10px;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.compare-table th {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #999;
+  letter-spacing: 0.5px;
+}
+
+.compare-table th:first-child,
+.compare-table td:first-child {
+  text-align: left;
+  color: #666;
+}
+
+.compare-table td {
+  font-weight: 600;
+}
+
+.compare-table .yours {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.compare-table .exact {
+  color: #1a7a1a;
+}
+
+.compare-table .better {
+  color: #1a5cb0;
+}
+
 @media (max-width: 480px) {
   .hero h1 { font-size: 22px; }
   .browse-grid { grid-template-columns: 1fr; }
   .stats { gap: 20px; }
   .stat-num { font-size: 20px; }
+  .compare-table { font-size: 12px; }
+  .compare-table th, .compare-table td { padding: 6px 5px; }
 }
