@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scan Nameplate | EquipSpec</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="scan.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">Equip<span>Spec</span></a>
+      <a href="index.html" class="nav-link">Home</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Step 1: Capture -->
+    <div id="step-capture" class="scan-step active">
+      <div class="scan-hero">
+        <h1>Identify Your Equipment</h1>
+        <p>Take a photo of the nameplate. We'll read the model, serial, and specs instantly.</p>
+      </div>
+
+      <div class="capture-area" id="capture-area">
+        <div class="capture-icon">&#128247;</div>
+        <div class="capture-text">Tap to take a photo of the nameplate</div>
+        <div class="capture-hint">Usually found inside the door, on the back, or underneath</div>
+        <input type="file" id="photo-input" accept="image/*" capture="environment">
+      </div>
+
+      <div id="preview-area" class="preview-area" style="display:none;">
+        <img id="preview-img" alt="Nameplate photo">
+        <button id="btn-analyze" class="search-btn">Analyze Nameplate</button>
+        <button id="btn-retake" class="retake-btn">Retake Photo</button>
+      </div>
+
+      <div class="scan-tips">
+        <div class="spec-section-title">Tips for a Good Scan</div>
+        <div class="tip-grid">
+          <div class="tip">
+            <div class="tip-icon">&#128161;</div>
+            <div class="tip-text"><strong>Good lighting</strong> — Use your phone's flashlight. Avoid glare on metal plates.</div>
+          </div>
+          <div class="tip">
+            <div class="tip-icon">&#128207;</div>
+            <div class="tip-text"><strong>Fill the frame</strong> — Get close enough to read the smallest text.</div>
+          </div>
+          <div class="tip">
+            <div class="tip-icon">&#129529;</div>
+            <div class="tip-text"><strong>Wipe first</strong> — A quick wipe with a dry cloth makes a big difference on greasy plates.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="where-to-find">
+        <div class="spec-section-title">Where to Find the Nameplate</div>
+        <div class="location-grid">
+          <div class="location-item">
+            <span class="location-type">Ice Machines</span>
+            <span class="location-place">Back of unit or inside front cover</span>
+          </div>
+          <div class="location-item">
+            <span class="location-type">Ovens</span>
+            <span class="location-place">Inside door frame or behind storage drawer</span>
+          </div>
+          <div class="location-item">
+            <span class="location-type">Refrigerators</span>
+            <span class="location-place">Interior side wall (upper area) or rear panel</span>
+          </div>
+          <div class="location-item">
+            <span class="location-type">Fryers</span>
+            <span class="location-place">Inside the fryer door panel</span>
+          </div>
+          <div class="location-item">
+            <span class="location-type">Dishwashers</span>
+            <span class="location-place">Side of door or side wall near bottom</span>
+          </div>
+          <div class="location-item">
+            <span class="location-type">Ranges</span>
+            <span class="location-place">Inside oven door frame or behind control panel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Analyzing (loading state) -->
+    <div id="step-analyzing" class="scan-step">
+      <div class="analyzing-state">
+        <div class="analyzing-spinner"></div>
+        <h2>Reading Nameplate...</h2>
+        <p>Extracting manufacturer, model, serial number, and specs</p>
+        <div class="analyzing-steps">
+          <div class="a-step done" id="a1">Detecting text regions</div>
+          <div class="a-step active" id="a2">Identifying manufacturer</div>
+          <div class="a-step" id="a3">Extracting model &amp; serial</div>
+          <div class="a-step" id="a4">Reading electrical specs</div>
+          <div class="a-step" id="a5">Matching to database</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Results (confirm/edit) -->
+    <div id="step-results" class="scan-step">
+      <div class="model-header">
+        <h1 id="result-title">Hoshizaki KM-901MAJ</h1>
+        <div class="subtitle" id="result-subtitle">Crescent Cube Ice Machine, Air-Cooled, 920 lbs/day</div>
+        <div class="status-row">
+          <span class="badge badge-green" id="result-confidence">High Confidence</span>
+          <span class="badge badge-blue" id="result-age">Manufactured ~2018</span>
+        </div>
+      </div>
+
+      <div class="spec-section">
+        <div class="spec-section-title">Extracted from Nameplate</div>
+        <div class="result-field">
+          <label>Manufacturer</label>
+          <input type="text" id="f-manufacturer" value="Hoshizaki" class="result-input">
+          <span class="field-confidence high">&#10003;</span>
+        </div>
+        <div class="result-field">
+          <label>Model Number</label>
+          <input type="text" id="f-model" value="KM-901MAJ" class="result-input">
+          <span class="field-confidence high">&#10003;</span>
+        </div>
+        <div class="result-field">
+          <label>Serial Number</label>
+          <input type="text" id="f-serial" value="W10847" class="result-input">
+          <span class="field-confidence med">~</span>
+        </div>
+        <div class="result-field">
+          <label>Voltage</label>
+          <input type="text" id="f-voltage" value="208-230V" class="result-input">
+          <span class="field-confidence high">&#10003;</span>
+        </div>
+        <div class="result-field">
+          <label>Phase</label>
+          <input type="text" id="f-phase" value="Single (60 Hz)" class="result-input">
+          <span class="field-confidence high">&#10003;</span>
+        </div>
+        <div class="result-field">
+          <label>Amperage</label>
+          <input type="text" id="f-amps" value="12.5A" class="result-input">
+          <span class="field-confidence high">&#10003;</span>
+        </div>
+        <div class="result-field-hint">
+          Fields marked <span class="field-confidence high inline">&#10003;</span> are high confidence.
+          <span class="field-confidence med inline">~</span> means check the value. You can edit any field.
+        </div>
+      </div>
+
+      <button id="btn-confirm" class="search-btn">Confirm &amp; Look Up Specs</button>
+
+      <div class="cant-read-banner">
+        <strong>Nameplate hard to read?</strong> You can also
+        <a href="#" id="link-manual-entry">type the model number manually</a> or
+        <a href="#" id="link-visual-id">identify by photos of the equipment</a>.
+      </div>
+    </div>
+
+    <!-- Step 4: Equipment identified — specs + actions -->
+    <div id="step-equipment" class="scan-step">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a> &rsaquo; <a href="#" id="eq-brand-link">Hoshizaki</a> &rsaquo; <span id="eq-model-text">KM-901MAJ</span>
+      </div>
+
+      <div class="model-header">
+        <h1 id="eq-title">Hoshizaki KM-901MAJ</h1>
+        <div class="subtitle" id="eq-subtitle">Crescent Cube Ice Machine, Air-Cooled, 920 lbs/day</div>
+        <div class="status-row">
+          <span class="badge badge-yellow">Your Unit</span>
+          <span class="badge badge-blue" id="eq-age-badge">~7 years old</span>
+          <span class="badge badge-blue" id="eq-serial-badge">S/N: W10847</span>
+        </div>
+      </div>
+
+      <div class="spec-section">
+        <div class="spec-section-title">Quick Specs</div>
+        <div class="spec-row"><span class="spec-label">Type</span><span class="spec-value">Crescent Cube Ice Machine</span></div>
+        <div class="spec-row"><span class="spec-label">Production</span><span class="spec-value">920 lbs/24hr</span></div>
+        <div class="spec-row"><span class="spec-label">Dimensions</span><span class="spec-value">30"W x 27-3/8"D x 41-1/2"H</span></div>
+        <div class="spec-row"><span class="spec-label">Electrical</span><span class="spec-value">208-230V, 1Ph, 12.5A</span></div>
+        <div class="spec-row"><span class="spec-label">Refrigerant</span><span class="spec-value">R-404A (22.6 oz)</span></div>
+        <div class="spec-row"><span class="spec-label">Water Connection</span><span class="spec-value">3/4" GHT inlet</span></div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="action-cards">
+        <a href="#" class="action-card action-replace">
+          <div class="action-icon">&#128260;</div>
+          <div class="action-body">
+            <strong>Find Replacement</strong>
+            <span>3 compatible ice machines that fit your space and utilities</span>
+          </div>
+        </a>
+        <a href="https://www.partstown.com/hoshizaki/km-901maj/parts" class="action-card action-parts" target="_blank">
+          <div class="action-icon">&#128295;</div>
+          <div class="action-body">
+            <strong>Order Parts</strong>
+            <span>View parts diagram and order on Parts Town</span>
+          </div>
+        </a>
+        <a href="#" class="action-card action-docs">
+          <div class="action-icon">&#128196;</div>
+          <div class="action-body">
+            <strong>Manuals &amp; Docs</strong>
+            <span>Spec sheet, service manual, wiring diagram</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="spec-section">
+        <div class="spec-section-title">Repair vs. Replace</div>
+        <div class="rvr-box">
+          <div class="rvr-row">
+            <span class="spec-label">Unit Age</span>
+            <span class="spec-value">~7 years (avg lifespan: 10-12 years)</span>
+          </div>
+          <div class="rvr-row">
+            <span class="spec-label">Common Repairs</span>
+            <span class="spec-value">Compressor ($800-1,200), Water valve ($150-250)</span>
+          </div>
+          <div class="rvr-row">
+            <span class="spec-label">New Equivalent</span>
+            <span class="spec-value">KM-901MAJ (current) ~$5,200-$6,400</span>
+          </div>
+          <div class="rvr-verdict">
+            <strong>Assessment:</strong> At 7 years, this unit has 3-5 years of useful life remaining. Repair likely makes sense unless you're seeing repeated failures.
+          </div>
+        </div>
+      </div>
+
+      <div class="scan-another">
+        <button id="btn-scan-another" class="retake-btn" style="width:100%;">Scan Another Piece of Equipment</button>
+      </div>
+    </div>
+
+    <!-- Alternative: Visual ID flow (when nameplate is unreadable) -->
+    <div id="step-visual-id" class="scan-step">
+      <div class="scan-hero">
+        <h1>Identify Without Nameplate</h1>
+        <p>We'll narrow it down using photos and a few questions.</p>
+      </div>
+
+      <div class="spec-section">
+        <div class="spec-section-title">Step 1: What type of equipment?</div>
+        <div class="type-grid">
+          <button class="type-btn" data-type="ice-machine">Ice Machine</button>
+          <button class="type-btn" data-type="refrigerator">Refrigerator / Freezer</button>
+          <button class="type-btn" data-type="oven">Oven</button>
+          <button class="type-btn" data-type="fryer">Fryer</button>
+          <button class="type-btn" data-type="dishwasher">Dishwasher</button>
+          <button class="type-btn" data-type="steamer">Steamer</button>
+          <button class="type-btn" data-type="range">Range / Cooktop</button>
+          <button class="type-btn" data-type="other">Other</button>
+        </div>
+      </div>
+
+      <div class="spec-section">
+        <div class="spec-section-title">Step 2: Take 2-4 photos</div>
+        <div class="multi-photo-area">
+          <div class="photo-slot" id="slot-front">
+            <div class="slot-label">Front</div>
+            <div class="slot-icon">+</div>
+          </div>
+          <div class="photo-slot" id="slot-side">
+            <div class="slot-label">Side</div>
+            <div class="slot-icon">+</div>
+          </div>
+          <div class="photo-slot" id="slot-back">
+            <div class="slot-label">Back</div>
+            <div class="slot-icon">+</div>
+          </div>
+          <div class="photo-slot" id="slot-controls">
+            <div class="slot-label">Controls</div>
+            <div class="slot-icon">+</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-section">
+        <div class="spec-section-title">Step 3: Measurements (if you have them)</div>
+        <div class="measure-row">
+          <div class="measure-field">
+            <label>Width</label>
+            <input type="text" placeholder='e.g. 30"'>
+          </div>
+          <div class="measure-field">
+            <label>Depth</label>
+            <input type="text" placeholder='e.g. 28"'>
+          </div>
+          <div class="measure-field">
+            <label>Height</label>
+            <input type="text" placeholder='e.g. 42"'>
+          </div>
+        </div>
+      </div>
+
+      <button class="search-btn" id="btn-visual-identify">Find Matching Equipment</button>
+
+      <div class="cant-read-banner" style="margin-top:16px;">
+        This will show 2-5 possible matches. The more photos and measurements you provide, the more accurate the match.
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      EquipSpec — Instant specs for commercial kitchen equipment
+    </div>
+  </footer>
+
+  <script src="scan.js"></script>
+</body>
+</html>
